@@ -50,7 +50,7 @@
                 <div class="col-2">
 
                     @foreach($technologies as $technology)
-                    <input type="checkbox" name="technologies[]" id="technologies" id="technologies-{{ $technology->id}}"value="{{ $technology>id}}"  >
+                    <input type="checkbox" name="technologies[]" id="technologies-{{ $technology->id}}"value="{{ $technology>id}}"  >
                     <label for="technologies">HTML</label>
                     @endforeach
 
