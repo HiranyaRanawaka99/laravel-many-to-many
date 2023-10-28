@@ -49,11 +49,11 @@
             <div class="row">
                 <div class="col-2">
 
-                    @foreach($technologies as $tecnology)
+                    @foreach($technologies as $technology)
                     <input type="checkbox" name="technologies[]" id="technologies" id="technologies-{{ $technology->id}}"value="{{ $technology>id}}"  >
                     <label for="technologies">HTML</label>
                     @endforeach
-                    
+
                 </div>
             </div>
         </div>
