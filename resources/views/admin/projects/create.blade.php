@@ -44,6 +44,23 @@
             </div>
             @enderror
         </div>
+
+        <div class="col-12 my-3">
+            <div class="row">
+                <div class="col-2">
+
+                    @foreach($technologies as $tecnology)
+                    <input type="checkbox" name="technologies[]" id="technologies" id="technologies-{{ $technology->id}}"value="{{ $technology>id}}"  >
+                    <label for="technologies">HTML</label>
+                    @endforeach
+                    
+                </div>
+            </div>
+        </div>
+
+
+
+
         <div class="col-12 my-3"> 
             <label for="description" class="form-label">Descrizione</label>
             <textarea name="description" id="description" rows="5"  class="form-control @error('title')is-invalid @enderror"> {{ old('description') }} </textarea>

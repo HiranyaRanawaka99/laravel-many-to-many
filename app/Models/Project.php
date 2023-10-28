@@ -22,9 +22,12 @@ class Project extends Model
         return $this->belongsTo(Type::class);
     }
 
+    public function technologies() {
+        return $this->belongsToMany(Technology::class);
+    }
+
     public function getCategoryBadge() { 
         return $this->type ? "<span class='badge' style= 'background-color: {$this->type->color}'> {$this->type->tag} </span>": "Non categorizzato" ;
-
     }
     
 }
