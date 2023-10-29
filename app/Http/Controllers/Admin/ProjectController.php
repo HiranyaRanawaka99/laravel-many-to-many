@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpadateProjectRequest;
 use Illuminate\Http\Request;
+use App\Http\Requests\UpadateProjectRequest;
 use App\Http\Requests\StoreProjectRequest;
+
+use Illuminate\Support\Arr;
 
 use App\Models\Project;
 use App\Models\Type;
@@ -55,10 +57,13 @@ class ProjectController extends Controller
         $project->fill($data);
         $project->save();
 
+        //array è data e bisogna controllare che esista la chiave technologies
+        if(Arr::exists($data, 'tecnologies')) {
+            $project->technologies()->attach($data['technologies']);
+        }
+
         return redirect()->route('admin.projects.show', $project);
-
-
-    }
+    } 
 
     /**
      * Display the specified resource.

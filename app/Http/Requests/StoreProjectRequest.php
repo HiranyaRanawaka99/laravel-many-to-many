@@ -68,7 +68,7 @@ class StoreProjectRequest extends FormRequest
 
             'type_id.exists' => 'Fai una scelta tra le opzioni date',
 
-            'technologies.exisits' => 'Le tecnologie inserite non sono riconosciute',
+            'technologies.exists' => 'Le tecnologie inserite non sono riconosciute',
         ];
     }
 }
