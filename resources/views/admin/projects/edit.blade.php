@@ -56,17 +56,17 @@
         <div 
         class="col-12 my-3 form-check 
         @error('technologies')is-invalid @enderror">
-            <p> Scegli le tecnologie usate nel tuo progetto</p>
+        <p>Scegli le tecnologie usate nel tuo progetto</p>
             @foreach($technologies as $technology)
             <input 
             type="checkbox" 
             name="technologies[]" 
-            id="technologies-{{ $technology->id}}"
+            id="technology-{{ $technology->id}}"
             value ="{{ $technology->id}}"
             class="form-check-control" 
             {{-- controlla se id è nell'old oppure nell'array dei tag a cui il progetto è già associato --}}
-            @if (in_array($technology->id, old('technologies') ?? [] )) checked @endif>
-            <label for="technologies" class="me-3"> 
+            @if (in_array($technology->id, old('technologies', $technology_ids)))checked @endif>
+            <label for="technology-{{$technology->id}}" class="me-3"> 
                 {{$technology->label }}
             </label>
             @endforeach

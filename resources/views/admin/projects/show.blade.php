@@ -13,6 +13,18 @@
             <b> Categoria: </b> {!! $project->getCategoryBadge() !!} 
         </li>
         <li class="list-group-item">
+            <b> Tecnologie : </b>  
+            {!! $project->getTechnologyBadge() !!} 
+            </li>
+        {{-- <li class="list-group-item">
+            <b> Tecnologie: </b> 
+            @forelse ($project->technologies as $technology)
+            {{ $technology->label }} @unless($loop->last) , @else . @endunless
+        @empty
+            Nessun technology associato
+        @endforelse
+            </li> --}}
+        <li class="list-group-item">
             <b> Descrizione: </b>  {{ $project->description }}
         </li>
         <li class="list-group-item">

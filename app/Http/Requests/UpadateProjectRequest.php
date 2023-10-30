@@ -35,7 +35,7 @@ class UpadateProjectRequest extends FormRequest
                 'date' => ['required','date'],
                 'link' => ['required','url'],
                 'type_id' => [ 'nullable', 'exists:types,id'],
-        
+                'technologies'=> ['nullable','exists:technologies,id'],
             ];
         }
 
@@ -54,7 +54,9 @@ class UpadateProjectRequest extends FormRequest
                 'link.required' => 'Il link del progetto è obbligatorio',
                 'link.url' => 'Inserire un formato url',
 
-                'type_id.exists' => 'Fai una scelta'
+                'type_id.exists' => 'Fai una scelta',
+
+                'technologies.exists' => 'Le tecnologie inserite non sono riconosciute',
             ];
 
         }

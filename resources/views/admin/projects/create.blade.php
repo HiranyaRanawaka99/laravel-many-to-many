@@ -55,14 +55,13 @@
             <input 
             type="checkbox" 
             name="technologies[]" 
-            id="technologies-{{ $technology->id}}"
+            id="technology-{{ $technology->id}}"
             value ="{{ $technology->id}}"
             class="form-check-control" 
             @if (in_array($technology->id, old('technologies') ?? [] )) checked @endif>
-            <label for="technologies" class="me-3"> 
+            <label for="technology-{{$technology->id}}" class="me-3"> 
                 {{$technology->label }}
             </label>
-
             @endforeach
              
         </div>
@@ -102,7 +101,7 @@
         </div> 
 
         <div class="col-12 my-4">
-            <button class="btn btn-success">Salva</button>
+            <button type="submit" class="btn btn-success">Salva</button>
             <a class="btn btn-primary my-3" href="{{ route('admin.projects.index') }}">Torna alla lista progetti</a>
         </div>
         

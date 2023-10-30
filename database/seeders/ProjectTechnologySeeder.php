@@ -19,7 +19,7 @@ class ProjectTechnologySeeder extends Seeder
     public function run(Generator $faker)
     {
         $projects = Project::all();                   
-        $technologies = Technology::all()->pluck('id');
+        $technologies = Technology::all()->pluck('id')->toArray();
       
         foreach($projects as $project) {
           $project

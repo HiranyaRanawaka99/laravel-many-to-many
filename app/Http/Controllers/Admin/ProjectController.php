@@ -57,8 +57,8 @@ class ProjectController extends Controller
         $project->fill($data);
         $project->save();
 
-        //array è data e bisogna controllare che esista la chiave technologies
-        if(Arr::exists($data, 'tecnologies')) {
+        //l'array è data e bisogna controllare che esista la chiave technologies
+        if(Arr::exists($data, 'technologies')) {
             $project->technologies()->attach($data['technologies']);
         }
 
@@ -73,6 +73,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+      
         return view('admin.projects.show', compact('project'));
     }
 
@@ -85,10 +86,11 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
+        $technologies = Technology::all();
 
-        dd($project->technologies);
+        $technology_ids = $technologies->pluck('id')->toArray();
 
-        return view('admin.projects.edit', compact('project', 'types'));
+        return view('admin.projects.edit', compact('project', 'types', 'technologies', 'technology_ids'));
     }
 
     /**
@@ -100,14 +102,21 @@ class ProjectController extends Controller
      */
     public function update(UpadateProjectRequest $request, Project $project)
     {
-        $data = $request->validated();
-
-        $project->update($data);
-
         // Per fare slug? - Portarsi Str
         // $post->fill($data);
         // $post->slug = Str::slug($post->title);
         // $post->save();
+
+        $data = $request->validated();
+
+        $project->fill($data);
+        $project->update($data);
+
+        if (Arr::exists($data, 'technologies')) {
+            $project->technologies()->sync($data['technologies']);
+        } else {
+            $project->technologies()->detach();
+        }
 
         return redirect()->route('admin.projects.show', $project);
     }
