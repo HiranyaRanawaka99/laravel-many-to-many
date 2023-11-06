@@ -20,6 +20,7 @@
       <th scope="col">Titolo</th>
       <th scope="col">Categoria</th>
       <th scope="col">Dettagli</th>
+      <th scope="col"><a href="{{ route('admin.projects.trash.index')}}" class="btn btn-danger my-3"> Cestino </a></th>
     </tr>
   </thead>
   <tbody>
@@ -33,6 +34,8 @@
         <a href="{{ route('admin.projects.show', $project)}}" class="">  <i class="fa-solid fa-up-right-from-square"></i> </a>
         {{-- EDIT --}}
         <a href="{{ route('admin.projects.edit', $project)}}" class="">  <i class="fa-solid fa-pencil"></i> </a>
+      </td>
+      <td>
         {{-- DELETE --}}
         <a href="#" data-bs-toggle="modal" data-bs-target="#delete-modal-{{$project->id}}" class="mx-1">
           <i class="fa-solid fa-trash text-danger"></i>  

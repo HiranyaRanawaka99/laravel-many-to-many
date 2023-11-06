@@ -61,10 +61,11 @@
             <input 
             type="checkbox" 
             name="technologies[]" 
-            id="technology-{{ $technology->id}}"
-            value ="{{ $technology->id}}"
+            id="technology-{{ $technology->id }}"
+            value ="{{ $technology->id }}"
             class="form-check-control" 
             {{-- controlla se id è nell'old oppure nell'array dei tag a cui il progetto è già associato --}}
+            
             @if (in_array($technology->id, old('technologies', $technology_ids)))checked @endif>
             <label for="technology-{{$technology->id}}" class="me-3"> 
                 {{$technology->label }}

@@ -86,13 +86,13 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        $technologies = Technology::all();
+        $technologies = Technology::orderBy('label')->get();
 
-        $technology_ids = $technologies->pluck('id')->toArray();
+        $technology_ids = $project->technologies->pluck('id')->toArray();
 
         return view('admin.projects.edit', compact('project', 'types', 'technologies', 'technology_ids'));
     }
-
+ 
     /**
      * Update the specified resource in storage.
      *
@@ -129,8 +129,31 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        
         $project->delete();
         return redirect()->route('admin.projects.index', $project);
     }
-}
+
+    // CESTINO
+    public function trash() {
+        $projects = Project::orderByDesc('id')->onlyTrashed()->paginate(10);
+        return view('admin.projects.trash.index', compact('projects'));
+    }
+
+    public function forceDestroy(int $id) {
+
+        $projects = Project::onlyTrashed()->findOrFail($id);
+        $projects->technologies()->detach();
+        $projects->forceDelete();
+
+        return redirect()->route('admin.projects.trash.index');
+
+    }
+
+    public function restore(int $id) {
+        $project = Project::onlyTrashed()->findOrFail($id);
+        $project->restore();
+
+        return redirect()->route('admin.projects.trash.index');
+
+    }
+ }

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Guest\PageController as GuestPageController;
+use App\Models\Project;
 
 use App\Http\Controllers\Admin\ProjectController;
 
@@ -28,8 +29,13 @@ Route::middleware(['auth', 'verified'])
   ->group(function () {
 
     Route::get('/', [AdminPageController::class, 'index'])->name('home');
-    Route::resource('projects', ProjectController::class);
 
+    
+    Route::get('projects/trash' , [ProjectController::class, 'trash'])->name('projects.trash.index');
+    Route::patch('projects/trash/{project}/restore' , [ProjectController::class, 'restore'])->name('projects.trash.restore');
+    Route::delete('projects/trash/{project}/force-destroy' , [ProjectController::class, 'forceDestroy'])->name('projects.trash.force-destroy');
+    
+    Route::resource('projects', ProjectController::class);
 
   });
 

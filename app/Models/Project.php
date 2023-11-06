@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         "title",
@@ -33,16 +33,17 @@ class Project extends Model
     public function getTechnologyBadge()
     {
         $tecnology_badges = '';
+
         foreach ($this->technologies as $technology) {
-            if( $this->technologies) {
-                $tecnology_badges .= "<span class='badge' style= 'background-color: {$technology->color}'> {$technology->label} </span>";
-            } else {
-                $tecnology_badges .= "<span> Non ci sono tecnologie associate </span> ";
-            }
+            $tecnology_badges .= "<span class='badge' style= 'background-color: {$technology->color}'> {$technology->label} </span>";
+        }
+
+        if(!count($this->technologies)) {
+            $tecnology_badges .= "<span> Non ci sono tecnologie associate </span> ";
         }
 
         return $tecnology_badges;
-        }
+    }
 
     
 }
