@@ -17,6 +17,7 @@ class Project extends Model
         "link",
         "type_id",
         "technologies[]",
+        "cover_image"
     ];
         
     public function type() {

@@ -20,13 +20,40 @@
     </div>
     @endif
 
-    <form method="POST" action="{{ route('admin.projects.update', $project) }}" class="row"> 
+    <form method="POST" action="{{ route('admin.projects.update', $project) }}" class="row" anctyoe="multipart/form-data"> 
         @method("PATCH")
         @csrf
 
+        <div class="col-12 my-3"> 
+            <div class="row">
+                <div class="col-8">
+                    <label for="cover_image" class="form-label ">Immagine di copertina </label>
+                    <input type="file" name="cover_image" id="cover_image" class="form-control @error('cover_image')is-invalid @enderror" value="{{ old('cover_image')}}">
+                    @error('cover_image')
+                    <div class="invalid-feedback">
+                        {{$message }}
+                    </div>
+                    @enderror
+                </div>
+                <div class="col-4">
+                    <img src= "{{ asset('/storage/' . $project->cover_image)}}" class="imag-fluid" alt="" width= "100%">
+                </div>
+            </div>
+        {{-- <div class="col-4">
+            @if ($project->cover_image)
+            <span
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger delete-image-button">
+            <i class="fa-solid fa-trash" id="delete-image-button"></i>
+            <span class="visually-hidden">delete image</span>
+            </span>
+            @endif
+            <img src="{{ asset('/storage/' . $project->cover_image) }}" class="img-fluid" id="cover_image_preview">
+            </div> --}}
+    </div> 
+
         <div class="col-12"> 
             <label for="title" class="form-label"></label>
-            <input type="text" name="title" id="title" class="form-control @error('title')is-invalid @enderror" value=" {{  old('title') ?? $project->title}} ">
+            <input type="text" name="title" id="title" class="form-control @error('title')is-invalid @enderror" value="{{ old('title') ?? $project->title }}">
             @error('title')
             <div class="invalid-feedback">
                 {{$message }}
@@ -78,12 +105,9 @@
             </div>
         @enderror
 
-
-
-
         <div class="col-12"> 
-            <label for="link" class="form-label " value= "{{ old('link') ?? $project->link }}">Link</label>
-            <input type="url" name="link" id="link" class="form-control @error('link')is-invalid @enderror">
+            <label for="link" class="form-label">Link</label>
+            <input type="url" name="link" id="link"  value= "{{ old('link') ?? $project->link }}" class="form-control @error('link')is-invalid @enderror">
             @error('link')
             <div class="invalid-feedback">
                 {{$message }}
@@ -91,8 +115,8 @@
             @enderror
         </div> 
         <div class="col-12"> 
-            <label for="date" class="form-label " value="{{ old('date') ?? $project->date }}"> Data di pubblicazione</label>
-            <input type="date" name="date" id="date" class="form-control @error('date')is-invalid @enderror">
+            <label for="date" class="form-label "> Data di pubblicazione</label>
+            <input type="date" name="date" id="date" value="{{ old('date') ?? $project->date }}" class="form-control @error('date')is-invalid @enderror">
             @error('date')
             <div class="invalid-feedback">
                 {{$message }}

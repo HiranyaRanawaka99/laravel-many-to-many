@@ -8,10 +8,12 @@ use App\Http\Requests\UpadateProjectRequest;
 use App\Http\Requests\StoreProjectRequest;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Project;
 use App\Models\Type;
 use App\Models\Technology;
+
 class ProjectController extends Controller
 {
     /**
@@ -57,6 +59,14 @@ class ProjectController extends Controller
         $project->fill($data);
         $project->save();
 
+        //gestisco l'immagine 
+        if($request->hasFile('cover_image')) {
+        $cover_image_path = Storage::put("uploads/projects/{$project->id}/cover_image", $data['cover_image']);
+        $project->cover_image = $cover_image_path; 
+        }
+
+        $project->save();
+
         //l'array è data e bisogna controllare che esista la chiave technologies
         if(Arr::exists($data, 'technologies')) {
             $project->technologies()->attach($data['technologies']);
@@ -73,7 +83,6 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-      
         return view('admin.projects.show', compact('project'));
     }
 
@@ -108,10 +117,21 @@ class ProjectController extends Controller
         // $post->save();
 
         $data = $request->validated();
+        $project->fill($data); 
 
-        $project->fill($data);
-        $project->update($data);
+        //gestisco l'immagine
+        if ($request->hasFile('cover_image')) {
+            if($project->cover_image) {
+                Storage::delete($project->cover_image);
+            }
 
+            $cover_image_path = Storage::put('uploads/projects/cover_image', $data['cover_image']);
+             $project->cover_image = $cover_image_path;
+        }
+
+        $project->save();
+
+        //gestisco le tecnologie
         if (Arr::exists($data, 'technologies')) {
             $project->technologies()->sync($data['technologies']);
         } else {
@@ -141,9 +161,13 @@ class ProjectController extends Controller
 
     public function forceDestroy(int $id) {
 
-        $projects = Project::onlyTrashed()->findOrFail($id);
-        $projects->technologies()->detach();
-        $projects->forceDelete();
+        $project = Project::onlyTrashed()->findOrFail($id);
+        $project->technologies()->detach();
+
+        if($project->cover_image) {
+            Storage::delete($project->cover_image);
+        }
+        $project->forceDelete();
 
         return redirect()->route('admin.projects.trash.index');
 

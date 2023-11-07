@@ -51,7 +51,7 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
                   {{-- Delete Form --}}
-                  <form action="{{route('admin.projects.trash.force-destroy', $projects)}}" method="POST" class="mx-1">
+                  <form action="{{route('admin.projects.trash.force-destroy', $project)}}" method="POST" class="mx-1">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger">Conferma</button>
@@ -74,7 +74,7 @@
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
                 {{-- restore Form --}}
-                <form  method="POST" action= "{{route('admin.projects.trash.restore', $projects)}}" class="mx-1">
+                <form  method="POST" action= "{{ route('admin.projects.trash.restore', $project) }}" class="mx-1"> 
                   @csrf
                   @method('PATCH')
                   <button class="btn btn-danger">Conferma</button>

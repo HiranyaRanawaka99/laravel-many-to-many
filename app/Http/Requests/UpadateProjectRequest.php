@@ -36,6 +36,7 @@ class UpadateProjectRequest extends FormRequest
                 'link' => ['required','url'],
                 'type_id' => [ 'nullable', 'exists:types,id'],
                 'technologies'=> ['nullable','exists:technologies,id'],
+                // 'cover_image' => ['nullable','image', 'max:1000'],
             ];
         }
 
@@ -57,7 +58,10 @@ class UpadateProjectRequest extends FormRequest
                 'type_id.exists' => 'Fai una scelta',
 
                 'technologies.exists' => 'Le tecnologie inserite non sono riconosciute',
-            ];
+
+                // 'cover_image.image' => 'Il file caricato dev\'essere un\'immagine', 
+                // 'cover_image.max' => 'Il file caricato dev\'essere inferiore a 1000KB',  
+                ];
 
         }
     }
