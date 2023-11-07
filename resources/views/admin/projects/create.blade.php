@@ -22,19 +22,25 @@
         @csrf
 
         <div class="col-12 my-3"> 
-            <label for="cover_image" class="form-label ">Immagine di copertina </label>
-            <input type="file" name="cover_image" id="cover_image" class="form-control @error('cover_image')is-invalid @enderror" value="{{ old('cover_image') }}">
-            @error('cover_image')
-            <div class="invalid-feedback">
-                {{$message }}
+            <div class="row">
+                <div class="col-8">
+                    
+                    <label for="cover_image" class="form-label ">Immagine di copertina </label>
+                    <input type="file" name="cover_image" id="cover_image" class="form-control @error('cover_image')is-invalid @enderror" value="{{ old('cover_image') }}">
+                    @error('cover_image')
+                    <div class="invalid-feedback">
+                        {{$message }}
+                    </div>
+                    @enderror
+                </div> 
+                <div class="col-4">
+                    <img src="" class="img-fluid" id="cover_image_preview" width="100%">
+                </div>
             </div>
-            @enderror
-        </div> 
-        <div class="col-4">
-            <img src="" class="img-fluid" id="cover_image_preview">
-          </div>
+        </div>
 
-
+        
+        
 
         <div class="col-12 my-3"> 
             <label for="title" class="form-label ">Titolo</label>
@@ -129,11 +135,11 @@
 @endsection
 
 @section('scripts')
-<script type="text/javascript">
-const inputFileElement = document.getElementById('cover_image');
-const coverImagePreview = document.getElementById('cover_image_preview');
+  <script type="text/javascript">
+    const inputFileElement = document.getElementById('cover_image');
+    const coverImagePreview = document.getElementById('cover_image_preview');
 
-if (!coverImagePreview.getAttribute('src')) {
+    if (!coverImagePreview.getAttribute('src')) {
       coverImagePreview.src = "https://placehold.co/400";
     }
 
@@ -141,3 +147,5 @@ if (!coverImagePreview.getAttribute('src')) {
       const [file] = this.files;
       coverImagePreview.src = URL.createObjectURL(file);
     })
+  </script>
+@endsection
