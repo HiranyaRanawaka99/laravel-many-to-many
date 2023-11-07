@@ -36,7 +36,7 @@
                     @enderror
                 </div>
                 <div class="col-4">
-                    <img src= "{{ asset('/storage/' . $project->cover_image)}}" class="imag-fluid" alt="" width= "100%">
+                    <img src= "{{ asset('/storage/' . $project->cover_image)}}" class="imag-fluid" alt="" width= "100%" id="cover_image_preview">
                 </div>
             </div>
         {{-- <div class="col-4">
@@ -126,12 +126,20 @@
 
         <div class="col-12 my-2">
             <button class="btn btn-success">Salva</button>
-        </div>
-        
-
+        </div>      
     </form>
-
-
-
 </div>
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+const inputFileElement = document.getElementById('cover_image');
+const coverImagePreview = document.getElementById('cover_image_preview');
+inputFileElement.addEventListner('change', function(){
+    alert('immagine cambiata');
+    const[file] = this.files;
+    coverImagePreview.src= URL.createObjectURL(file);
+} )
+
+</script>
 @endsection

@@ -30,6 +30,9 @@
 
       @yield('modals')
     </div>
+
+
+    @yield('scripts')
   </body>
 
 </html>

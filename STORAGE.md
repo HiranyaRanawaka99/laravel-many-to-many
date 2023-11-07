@@ -210,3 +210,5 @@ opure uso hasFile al posto di Arr::exists
     $project->cover_image = $cover_img_path;
     }
 ```
+
+8. Eliminiamo l'i
