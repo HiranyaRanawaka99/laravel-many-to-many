@@ -61,7 +61,7 @@ class ProjectController extends Controller
 
         //gestisco l'immagine 
         if($request->hasFile('cover_image')) {
-        $cover_image_path = Storage::put("uploads/projects/{$project->id}/cover_image", $data['cover_image']);
+        $cover_image_path = Storage::put('uploads/projects/cover_image', $data['cover_image']);
         $project->cover_image = $cover_image_path; 
         }
 

@@ -30,6 +30,9 @@
             </div>
             @enderror
         </div> 
+        <div class="col-4">
+            <img src="" class="img-fluid" id="cover_image_preview">
+          </div>
 
 
 
@@ -124,3 +127,17 @@
 
 </div>
 @endsection
+
+@section('scripts')
+<script type="text/javascript">
+const inputFileElement = document.getElementById('cover_image');
+const coverImagePreview = document.getElementById('cover_image_preview');
+
+if (!coverImagePreview.getAttribute('src')) {
+      coverImagePreview.src = "https://placehold.co/400";
+    }
+
+    inputFileElement.addEventListener('change', function() {
+      const [file] = this.files;
+      coverImagePreview.src = URL.createObjectURL(file);
+    })
