@@ -30,13 +30,13 @@
         <td> 
       
           {{-- DELETE --}}
-          <a href="javascritpt:void(0)" data-bs-toggle="modal" data-bs-target="#delete-modal-{{$project->id}}" class="mx-1">
+          <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#delete-modal-{{$project->id}}" class="mx-1">
             <i class="fa-solid fa-trash text-danger"></i>  
           </a>
           {{-- RESTORE --}}
-            <a href="Javascritpt:void(0)" data-bs-toggle="modal" data-bs-target="#restore-modal-{{$project->id}}" class="mx-1">
-              <i class="fa-solid fa-arrow-yurn-up text-danger"></i>  
-          </a>
+          <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#restore-modal-{{$project->id}}" class="mx-1">
+            <i class="fa-solid fa-arrow text-danger">restore</i>  
+         </a>
           {{-- Modal delete --}}
           <div class="modal fade" id="delete-modal-{{$project->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -61,7 +61,7 @@
             </div>
           </div>
         {{-- Modal retore--}}
-        <div class="modal fade" id="delete-modal-{{$project->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="restore-modal-{{$project->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">

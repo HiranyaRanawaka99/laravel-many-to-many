@@ -18,12 +18,24 @@
     </div>
     @endif
 
-    <form method="POST" action="{{ route('admin.projects.store') }}" class="row"> 
+    <form method="POST" action="{{ route('admin.projects.store') }}" class="row" enctype="multipart/form-data"> 
         @csrf
 
         <div class="col-12 my-3"> 
-            <label for="title" class="form-label " value={{ old('title') }}>Titolo</label>
-            <input type="text" name="title" id="title" class="form-control @error('title')is-invalid @enderror">
+            <label for="cover_image" class="form-label ">Immagine di copertina </label>
+            <input type="file" name="cover_image" id="cover_image" class="form-control @error('cover_image')is-invalid @enderror" value="{{ old('cover_image') }}">
+            @error('cover_image')
+            <div class="invalid-feedback">
+                {{$message }}
+            </div>
+            @enderror
+        </div> 
+
+
+
+        <div class="col-12 my-3"> 
+            <label for="title" class="form-label ">Titolo</label>
+            <input type="text" name="title" id="title" class="form-control @error('title')is-invalid @enderror" value="{{ old('title') }}">
             @error('title')
             <div class="invalid-feedback">
                 {{$message }}
@@ -82,8 +94,8 @@
             @enderror
         </div> 
         <div class="col-12 my-3"> 
-            <label for="link" class="form-label " value= "{{ old('link')}}" >Link</label>
-            <input type="url" name="link" id="link" class="form-control @error('link')is-invalid @enderror">
+            <label for="link" class="form-label ">Link</label>
+            <input type="url" name="link" id="link" value= "{{ old('link')}}"  class="form-control @error('link')is-invalid @enderror">
             @error('link')
             <div class="invalid-feedback">
                 {{$message }}
@@ -91,8 +103,8 @@
             @enderror
         </div> 
         <div class="col-12 my-3"> 
-            <label for="date" class="form-label " value="{{ old('date') }}"> Data di pubblicazione</label>
-            <input type="date" name="date" id="date" class="form-control @error('date')is-invalid @enderror">
+            <label for="date" class="form-label"> Data di pubblicazione</label>
+            <input type="date" name="date" id="date" value="{{ old('date') }}" class="form-control @error('date')is-invalid @enderror">
             @error('date')
             <div class="invalid-feedback">
                 {{$message }}
